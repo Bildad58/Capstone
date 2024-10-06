@@ -6,3 +6,10 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
             return True
         return obj.owner == request.user
     
+from rest_framework.permissions import BasePermission
+
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        # Modify this logic based on your needs
+        return True  # Allow all users for demonstration purposes
+    

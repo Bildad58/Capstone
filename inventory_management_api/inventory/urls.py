@@ -17,7 +17,7 @@ from .views import *
 
 urlpatterns = [
     # Category URLs
-    path('categories/', CategoryViewSet.as_view({'get': 'list', 'post': 'create'}), name='category-list'),
+    path('categories/', CategoryViewSet.as_view({'get': 'list', 'post': 'create', 'put': 'update'}), name='category-list'),
     path('categories/<int:pk>/', CategoryViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='category-detail'),
 
     # InventoryProduct URLs

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'inventory',
     'Users',    
     'rest_framework',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -79,7 +80,7 @@ WSGI_APPLICATION = 'inventory_management_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Inventory_Management',
+        'NAME': 'Inventory',
         'USER': 'root',
         'PASSWORD': 'Bildad_Khaoya@58',
         'HOST':'localhost',
@@ -152,3 +153,11 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True
 }
+
+
+# SECURE_BROWSER_XSS_FILTER = True
+# X_FRAME_OPTIONS = 'DENY'
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True

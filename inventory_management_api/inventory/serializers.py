@@ -1,10 +1,17 @@
 from rest_framework import serializers
 from .models import *
+from django.contrib.auth import get_user_model
+
+user = get_user_model()
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = InventoryProduct
+        model = Category
         fields = ['id', 'name']
+
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user) 
 
 class SupplierSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,34 +21,20 @@ class SupplierSerializer(serializers.ModelSerializer):
 class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
-        fields = ['id', 'name', 'address']
+        fields = ['id', 'name', 'email', 'contact', 'address']
 
-from decimal import Decimal
 
 class InventoryProductSerializer(serializers.ModelSerializer):
-    category = serializers.PrimaryKeyRelatedField(queryset=Category.objects.all())
-    supplier = serializers.PrimaryKeyRelatedField(queryset=Supplier.objects.all(), allow_null=True)
-    store = serializers.PrimaryKeyRelatedField(queryset=Store.objects.all())
-    price = serializers.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        min_value=Decimal('0.00')  # Use a Decimal instance
-    )
+    category_name = serializers.StringRelatedField(source='category', read_only=True)
+    supplier_name = serializers.StringRelatedField(source='supplier', read_only=True)
+    store_name = serializers.StringRelatedField(source='store', read_only=True)
+    user_name = serializers.StringRelatedField(source='user', read_only=True)
 
     class Meta:
         model = InventoryProduct
-        fields = ['id', 'name', 'description', 'category', 'quantity', 'price', 'date_added', 'last_updated', 'supplier', 'store', 'barcode', 'reorder_level']
-        read_only_fields = ['id','date_added', 'last_updated', 'reorder_level']
-
-    
-   
-
-    def create(self, validated_data):
-        user = self.context['request'].user
-        return InventoryProduct.objects.create(user=user, **validated_data)
-    
+        fields = '__all__'
 class InventoryChangeSerializer(serializers.ModelSerializer):   
     class Meta:
         model = InventoryChange
-        fields = ['id', 'product', 'quantity', 'timestamp', 'user', 'reason']
+        fields = ['id', 'product', 'quantity','quantity_change', 'timestamp', 'user', 'reason']
         read_only_fields = ['id', 'timestamp', 'user']
