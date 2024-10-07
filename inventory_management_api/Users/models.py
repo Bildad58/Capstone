@@ -38,13 +38,14 @@ class UserManager(BaseUserManager):
 
 class CustomUser(AbstractUser):
     # Custom User model with email as the unique identifier
-    username = models.CharField(max_length=150, unique=True, blank=True, null=True)
+
     email = models.EmailField(max_length=150, unique=True)
+    username = models.CharField(max_length=150, unique=True, null=True, blank=True)
     
     objects = UserManager()
     
     USERNAME_FIELD = 'email'  # Use email for authentication instead of username
-    REQUIRED_FIELDS = []  # Email and password are required by default
+    REQUIRED_FIELDS = ['username']  # Email and password are required by default
     
     def __str__(self):
         return self.email

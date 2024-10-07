@@ -39,12 +39,12 @@ class InventoryProduct(models.Model):
     last_updated = models.DateField(auto_now=True)  # Date of last update
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)  # User who added/manages this product
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)  # Product supplier
-    store = models.ForeignKey(Store, on_delete=models.CASCADE, default=1, blank=False, null=False)  # Store where product is located
+    store = models.ForeignKey(Store, on_delete=models.CASCADE,  blank=False, null=False)  # Store where product is located
     barcode = models.CharField(max_length=100, unique=True, null=True, blank=True)  # Optional unique barcode
     reorder_level = models.PositiveIntegerField(default=10)  # Quantity at which to reorder
 
     def __str__(self):
-        return f"{self.name} - Quantity: {self.quantity} at {self.store.name}"  # String representation of the product
+        return f"{self.name} - Quantity: {self.quantity}- @ ${self.price}"  # String representation of the product
 
 class InventoryChange(models.Model):
     product = models.ForeignKey(InventoryProduct, on_delete=models.CASCADE)  # Associated product
