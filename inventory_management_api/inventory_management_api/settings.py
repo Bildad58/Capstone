@@ -80,15 +80,12 @@ WSGI_APPLICATION = 'inventory_management_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bildad58$Inventory',
-        'USER': 'bildad58',
-        'PASSWORD': 'Location58',
-        'HOST':'bildad58.mysql.pythonanywhere-services.com',
+        'NAME': 'name',
+        'USER': 'user_name',
+        'PASSWORD': 'password',
+        'HOST':'root',
         'PORT':'3306',
-	'Options':{
-'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
-    }
-}
+
 }
 
 # Password validation
