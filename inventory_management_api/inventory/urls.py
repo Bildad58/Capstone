@@ -2,17 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from .views import *
 
-# router = DefaultRouter()
-# router.register(r'categories', CategoryViewSet, basename='category')
-# router.register(r'products', InventoryProductViewSet, basename='inventoryproduct')
-# router.register(r'changes', InventoryChangeViewSet, basename='inventorychange')
-# router.register(r'suppliers', SupplierViewSet, basename='supplier')
-# router.register(r'stores', StoreViewSet, basename='store')
 
-
-# urlpatterns = [
-#     path('', include(router.urls)),
-    
 
 
 urlpatterns = [
@@ -35,4 +25,8 @@ urlpatterns = [
     # Store URLs
     path('stores/', StoreViewSet.as_view({'get': 'list', 'post': 'create'}), name='store-list'),
     path('stores/<int:pk>/', StoreViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'}), name='store-detail'),
+
+
+
 ]
+
